@@ -1,8 +1,18 @@
-const pieceTemplate = document.querySelector("[data-piece-template]")
-const pieceContainer = document.querySelector("[pieces-container]")
-const searchInput = document.querySelector("[data-search]")
+const pieceTemplate = document.getElementById("data-piece-template")
+const pieceContainer = document.getElementById("pieces-container")
+const searchInput = document.getElementById("search")
 
 let pieces = []
+
+searchInput.addEventListener("input", e => {
+    const value = e.target.value.toLowerCase()
+    piece.forEach(piece => {
+        const isVisible = 
+        piece.title.toLowerCase().includes(value) || 
+        piece.composer.toLowerCase().includes(value)
+        piece.element.classList.toggle("hide", !isVisible)
+    })
+})
 
 fetch("https://github.com/Peavy101/JSON-for-excerpts/blob/main/pieces.json")
 .then(res => res.json())
@@ -14,6 +24,8 @@ fetch("https://github.com/Peavy101/JSON-for-excerpts/blob/main/pieces.json")
         pieceTitle.textContent = piece.composer + piece.title
         //then i put in the link for the "pdf"
         pieceContainer.append(piece)
+        return{composer: piece.composer, title: piece.title}
+        console.log(piece.composer);
     })
 })
 

@@ -58,3 +58,7 @@ h2 {
     gap: 2.5rem;
     margin-top: 1rem;
 }
+
+.hide {
+    display: none;
+}
