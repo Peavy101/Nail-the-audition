@@ -17,7 +17,22 @@
     <h2>Library</h2>
     <div class="search-wrapper">
         <label for="search">Search pieces</label>
-        <input type="search" id="search">
+        <input type="search" id="search" data-search>
     </div>
+    <div class="pieces" pieces-container></div>
+    <template data-piece-template>
+        <div class="piece">
+            <button class="pieceTitle" data-header>Bach Orchestral Suite No. 2 Badinerie</button>
+            <iframe src="https://bachorchestralsuite2.tiiny.site" frameborder="0" width="500px" height="1000px" class="pdf"></iframe>
+        </div>
+    </template>
+    <!-- <div class="piece">
+        <button class="pieceTitle">Bach Orchestral Suite No. 2 Badinerie</button>
+        <iframe src="https://drive.google.com/file/d/1O_HdQqrEG-eIFEGt0q9odzdTrLhWTS4_/preview" frameborder="0" width="450px" height="575px" class="pdf"></iframe>
+    </div>
+    <div class="piece">
+        <button class="pieceTitle">Beethoven Symphony 5</button>
+        <iframe src="https://drive.google.com/file/d/1z5UkKCH5k5D19pSaBA4iwbRoZrJ6yufd/preview" frameborder="0" width="450px" height="575px" class="pdf"></iframe>
+    </div> -->
 </body>
 </html>

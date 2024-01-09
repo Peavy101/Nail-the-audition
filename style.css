@@ -35,3 +35,26 @@ h2 {
     width: 50%;
     text-align: center;
 }
+
+.piece {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid black;
+    padding: 35px;
+    margin-top: 35px;
+    width: 425px;
+}
+
+.pieceTitle {
+    margin-bottom: 25px;
+    font-family: Inconsolata;
+}
+
+.pieces {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 2.5rem;
+    margin-top: 1rem;
+}
