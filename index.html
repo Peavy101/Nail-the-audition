@@ -10,10 +10,39 @@
 <body>
     <h1>Nail the Audition</h1>
     <nav>
-        <ul>home</ul>
-        <ul><a href="library.html">library</a></ul>
-        <ul>audition list</ul>
+        <ul home>home</ul>
+        <ul library>library</ul>
+        <ul audition-list>audition list</ul>
     </nav>
-    <h2>Nail the audition is your tool for finding all the excerpts you need for your upcoming audition, as well as quick and easy access to a compiled practice list</h2>
+    
+    <section class="page" id="home">
+        <h2>Nail the audition is your tool for finding all the excerpts you need for your upcoming audition, as well as quick and easy access to a compiled practice list</h2>
+    </section>
+
+    <section class="page hide" id="library">
+        <h2>Library</h2>
+        <div class="search-wrapper">
+            <label for="search">Search pieces</label>
+            <input type="search" id="search" data-search>
+        </div>
+        <div class="pieces" id="pieces-container"></div>
+
+        <template id="data-piece-template">
+            <div class="piece">
+                <div class="flex-row">
+                    <p class="title"></p>
+                    <p class="composer"></p>
+                </div>
+                <p class="genre"></p>
+                <iframe class="sheet" frameborder="0" width="500px" height="1000px" class="pdf"></iframe>
+            </div>
+        </template>
+    </section>
+
+    <section class="page hide" id="audition-list">
+        <h2>Audition List</h2>
+    </section>
+
+    <script src="main.js"></script>
 </body>
 </html>
