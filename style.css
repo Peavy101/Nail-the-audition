@@ -13,7 +13,11 @@ h1 {
     justify-content: left;
     width: 100%;
     font-size: x-large;
-    padding-left: 15px;
+    padding-left: 25px;
+}
+
+.home-text {
+    margin-top: 50px;
 }
 
 nav {
@@ -29,6 +33,7 @@ nav {
 ul {
     padding-left: 10%;
     padding-right: 10%;
+    cursor: pointer;
 }
 
 h2 {
@@ -42,23 +47,35 @@ h2 {
     justify-content: center;
     align-items: center;
     border: 1px solid black;
-    padding: 35px;
+    padding: 0px;
     margin-top: 35px;
     width: 425px;
+    cursor: pointer;
 }
 
-.pieceTitle {
-    margin-bottom: 25px;
-    font-family: Inconsolata;
+.accordion-trigger {
+    cursor: pointer;
 }
 
-.pieces {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-    gap: 2.5rem;
-    margin-top: 1rem;
+
+.composer {
+    padding-right: 6px;
+}
+
+.flex-row {
+    display: flex;
+    flex-direction: row;
+}
+
+.sheet {
+    padding-bottom: 10px;
 }
 
 .hide {
     display: none;
+}
+
+.genre {
+    display: flex;
+    justify-content: center;
 }

@@ -16,7 +16,7 @@
     </nav>
     
     <section class="page" id="home">
-        <h2>Nail the audition is your tool for finding all the excerpts you need for your upcoming audition, as well as quick and easy access to a compiled practice list</h2>
+        <h2 class="home-text">Nail the audition is your tool for finding all the excerpts you need for your upcoming audition, as well as quick and easy access to a compiled practice list</h2>
     </section>
 
     <section class="page hide" id="library">
@@ -28,14 +28,18 @@
         <div class="pieces" id="pieces-container"></div>
 
         <template id="data-piece-template">
-            <div class="piece">
-                <div class="flex-row">
-                    <p class="title"></p>
-                    <p class="composer"></p>
+                <div class="piece">
+                    <div class="accordion-trigger">
+                        <div class="flex-row">
+                            <p class="composer"></p>
+                            <p class="title"></p>
+                        </div>
+                    </div>
+                    <div class="accordion-content hide">
+                        <iframe class="sheet" frameborder="0" width="400px" height="500px" class="pdf"></iframe>
+                        <p class="genre"></p>
+                    </div>
                 </div>
-                <p class="genre"></p>
-                <iframe class="sheet" frameborder="0" width="500px" height="1000px" class="pdf"></iframe>
-            </div>
         </template>
     </section>
 

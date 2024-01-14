@@ -29,7 +29,7 @@ nav_links.forEach(
 
 searchInput.addEventListener("input", e => {
     const value = e.target.value.toLowerCase()
-    piece.forEach(piece => {
+    pieces.forEach(piece => {
         const isVisible = 
         piece.title.toLowerCase().includes(value) || 
         piece.composer.toLowerCase().includes(value)
@@ -43,8 +43,6 @@ fetch("https://api.npoint.io/d1c2bc93f272778194a3")
     pieces = data.map(piece => {
         // Clone the template from our HTML layout
         const pieceNode = pieceTemplate.content.cloneNode(true)
-
-        
         
         // Grab each of the component elements of our 'piece card' to work with
         const pieceTitle = pieceNode.querySelector('.title')
@@ -61,6 +59,18 @@ fetch("https://api.npoint.io/d1c2bc93f272778194a3")
         pieceSheet.setAttribute('src', piece.link)
         
         pieceContainer.appendChild(pieceNode)
-    })
+        return pieceNode;
+        // return {title: piece.title, composer: piece.composer, element: pieceNode}
+    });
+    let accordions = document.querySelectorAll('.piece');
+
+    accordions.forEach((accoTrigger) => {
+        accoTrigger.addEventListener('click', () => {
+            console.log("woot!");
+            const content = accoTrigger.querySelector('.accordion-content')
+            content.classList.toggle('hide');
+        })
+    });
 })
+
 
