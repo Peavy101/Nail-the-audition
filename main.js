@@ -71,7 +71,7 @@ fetch("https://api.npoint.io/d1c2bc93f272778194a3")
             pieceGenre.innerHTML = pieceData.genre;
 
             // Attach the PDF link from the API into the 'src' attribute of our template's iframe
-            // pieceSheet.setAttribute('src', pieceData.link);
+            pieceSheet.setAttribute('src', pieceData.link);
 
             pieceContainer.appendChild(pieceNode);
             return { title: pieceData.title, composer: pieceData.composer, genre: pieceData.genre, element: pieceElement };

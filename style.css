@@ -41,6 +41,10 @@ h2 {
     text-align: center;
 }
 
+.pieces {
+    padding-bottom: 50px;
+}
+
 .piece {
     display: flex;
     flex-direction: column;
