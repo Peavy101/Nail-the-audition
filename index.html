@@ -20,27 +20,57 @@
     </section>
 
     <section class="page hide" id="library">
-        <h2>Library</h2>
-        <div class="search-wrapper">
-            <label for="search">Search pieces</label>
-            <input type="search" id="search" data-search>
-        </div>
-        <div class="pieces" id="pieces-container"></div>
+        <div class="librarySide">
+            <h2>Library</h2>
+            <div class="search-wrapper">
+                <label for="search">Search pieces</label>
+                <input type="search" id="search" data-search>
+            </div>
+            <div class="pieces" id="pieces-container"></div>
 
-        <template id="data-piece-template">
-                <div class="piece">
-                    <div class="accordion-trigger">
-                        <div class="flex-row">
-                            <p class="composer"></p>
-                            <p class="title"></p>
+            <template id="data-piece-template">
+                    <div class="piece">
+                        <div class="accordion-trigger">
+                            <div class="flex-row">
+                                <p class="composer"></p>
+                                <p class="title"></p>
+                            </div>
+                            <div>
+                                <button class="addPiece">add to list</button>
+                            </div>
+                        </div>
+                        <div class="accordion-content hide">
+                            <iframe class="sheet" frameborder="0" width="400px" height="500px" class="pdf"></iframe>
+                            <p class="genre"></p>
                         </div>
                     </div>
-                    <div class="accordion-content hide">
-                        <iframe class="sheet" frameborder="0" width="400px" height="500px" class="pdf"></iframe>
-                        <p class="genre"></p>
-                    </div>
+            </template>
+        </div>
+        <aside>
+            <h3>Audition List</h3>
+            <div class="list-container">
+                <div class="list-piece" draggable="true">
+                    <p>Beethoven Symphony 5</p>
+                    <button class="removePiece">X</button>
                 </div>
-        </template>
+                <div class="list-piece" draggable="true">
+                    <p>Brahms Symphony 2</p>
+                    <button class="removePiece">X</button>
+                </div>
+                <div class="list-piece" draggable="true">
+                    <p>Bach Badinerie</p>
+                    <button class="removePiece">X</button>
+                </div>
+                <div class="list-piece" draggable="true">
+                    <p>Berlioz Symphonie Fantastique</p>
+                    <button class="removePiece">X</button>
+                </div>
+                <div class="list-piece" draggable="true">
+                    <p>Mussorgsky/Ravel Pictures at an exhibition</p>
+                    <button class="removePiece">X</button>
+                </div>
+            </div>
+        </aside>
     </section>
 
     <section class="page hide" id="audition-list">

@@ -1,6 +1,9 @@
 const pieceTemplate = document.getElementById("data-piece-template")
 const pieceContainer = document.getElementById("pieces-container")
 const searchInput = document.getElementById("search")
+const draggables = document.querySelectorAll('.list-piece')
+const containers = document.querySelectorAll('.list-container')
+
 
 let pieces = []
 
@@ -71,7 +74,7 @@ fetch("https://api.npoint.io/d1c2bc93f272778194a3")
             pieceGenre.innerHTML = pieceData.genre;
 
             // Attach the PDF link from the API into the 'src' attribute of our template's iframe
-            pieceSheet.setAttribute('src', pieceData.link);
+            //pieceSheet.setAttribute('src', pieceData.link);
 
             pieceContainer.appendChild(pieceNode);
             return { title: pieceData.title, composer: pieceData.composer, genre: pieceData.genre, element: pieceElement };
@@ -89,38 +92,39 @@ fetch("https://api.npoint.io/d1c2bc93f272778194a3")
     });
 
 
-//the old version before changing it to elements rather than nodes
-// fetch("https://api.npoint.io/d1c2bc93f272778194a3")
-// .then(res => res.json())
-// .then(data => {
-//     pieces = data.map(piece => {
-//         // Clone the template from our HTML layout
-//         const pieceNode = pieceTemplate.content.cloneNode(true)
-        
-//         // Grab each of the component elements of our 'piece card' to work with
-//         const pieceTitle = pieceNode.querySelector('.title')
-//         const pieceComposer = pieceNode.querySelector('.composer')
-//         const pieceGenre = pieceNode.querySelector('.genre')
-//         const pieceSheet = pieceNode.querySelector('.sheet')
-        
-//         // Apply Data from the API to each of the component elements
-//         pieceTitle.innerHTML = piece.title
-//         pieceComposer.innerHTML = piece.composer
-//         pieceGenre.innerHTML = piece.genre
-        
-//         // Attach the PDF link from the API into the 'src' attribute of our template's iframe
-//         //pieceSheet.setAttribute('src', piece.link)
-        
-//         pieceContainer.appendChild(pieceNode)
-//         return {title: piece.title, composer: piece.composer, genre: piece.genre, element: pieceNode}
-//     })
-//     let accordions = document.querySelectorAll('.piece');
+draggables.forEach(draggable => {
+    draggable.addEventListener('dragstart', () => {
+        draggable.classList.add('dragging')
+    })
 
-//     accordions.forEach((accoTrigger) => {
-//         accoTrigger.addEventListener('click', () => {
-//             console.log("woot!");
-//             const content = accoTrigger.querySelector('.accordion-content')
-//             content.classList.toggle('hide');
-//         })
-//     })
-// })
+    draggable.addEventListener('dragend', () => {
+        draggable.classList.remove('dragging')
+    })
+})
+
+containers.forEach(container => {
+    container.addEventListener('dragover', e => {
+        e.preventDefault()
+        const afterElement = getDragAfterElement(container, e.clientY)
+        const draggable = document.querySelector('.dragging')
+        if (afterElement == null) {
+            container.appendChild(draggable)
+        } else {
+            container.insertBefore(draggable, afterElement)
+        }
+    })
+})
+
+function getDragAfterElement(container, y) {
+    const draggableElements = [...container.querySelectorAll('.draggable:not(.dragging)')]
+    
+    return draggableElements.reduce((closest, child) => {
+        const box = child.getBoundingClientRect()
+        const offset = y - box.top - box.height / 2
+        if (offset < 0 && offset > closest.offset) {
+        return { offset: offset, element: child }
+        } else {
+        return closest
+        }
+    }, { offset: Number.NEGATIVE_INFINITY }).element
+    }
