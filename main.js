@@ -2,7 +2,7 @@ const pieceTemplate = document.getElementById("data-piece-template")
 const pieceContainer = document.getElementById("pieces-container")
 const searchInput = document.getElementById("search")
 const draggables = document.querySelectorAll('.list-piece')
-const containers = document.querySelectorAll('.list-container')
+const listContainer = document.getElementById("list-container")
 const removePieceButtons = document.querySelectorAll('.removePiece')
 
 let pieces = []
@@ -93,7 +93,7 @@ fetch("https://api.npoint.io/d1c2bc93f272778194a3")
         });
         const addPieceButtons = document.querySelectorAll('.addPiece')
         let isMouseOverButton = false;
-        
+
         addPieceButtons.forEach(button => {
             button.addEventListener('mouseenter', () => {
                 isMouseOverButton=true;
@@ -109,6 +109,21 @@ fetch("https://api.npoint.io/d1c2bc93f272778194a3")
         addPieceButtons.forEach(button => {
             button.addEventListener('click', () => {
                 console.log('ok')
+
+                const listPiece_id = Math.random(1000)/toString(36).substring(7);
+                const pieceWrapper = document.createElement("div");
+                pieceWrapper.setAttribute('id', listPiece_id);
+                
+                const pieceText = document.createElement("p");
+
+                const removePieceButton = document.createElement("button");
+                removePieceButton.innerText = "x";
+                removePieceButton.setAttribute('class', "removePiece");
+
+                pieceWrapper.appendChild(pieceText);
+                pieceWrapper.appendChild(removePieceButton);
+
+                listContainer.appendChild(pieceWrapper);
             })
         })
     });
@@ -124,19 +139,32 @@ draggables.forEach(draggable => {
     })
 })
 
-containers.forEach(container => {
-    container.addEventListener('dragover', e => {
-        e.preventDefault()
-        const afterElement = getDragAfterElement(container, e.clientY)
-        console.log(afterElement)
-        const draggable = document.querySelector('.dragging')
-        if (afterElement == null) {
-            container.appendChild(draggable)
-        } else {
-            container.insertBefore(draggable, afterElement)
-        }
-    })
+listContainer.addEventListener('dragover', e => {
+    e.preventDefault()
+    const afterElement = getDragAfterElement(listContainer, e.clientY)
+    console.log(afterElement)
+    const draggable = document.querySelector('.dragging')
+    if (afterElement == null) {
+        listContainer.appendChild(draggable)
+    } else {
+        listContainer.insertBefore(draggable, afterElement)
+    }
 })
+
+
+// containers.forEach(container => {
+//     container.addEventListener('dragover', e => {
+//         e.preventDefault()
+//         const afterElement = getDragAfterElement(container, e.clientY)
+//         console.log(afterElement)
+//         const draggable = document.querySelector('.dragging')
+//         if (afterElement == null) {
+//             container.appendChild(draggable)
+//         } else {
+//             container.insertBefore(draggable, afterElement)
+//         }
+//     })
+// })
 
 function getDragAfterElement(container, y) {
     const draggableElements = [...container.querySelectorAll('.draggable:not(.dragging)')]

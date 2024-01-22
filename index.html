@@ -48,7 +48,7 @@
         </div>
         <aside>
             <h3>Audition List</h3>
-            <div class="list-container">
+            <div id="list-container">
                 <div class="list-piece" draggable="true">
                     <p>Beethoven Symphony 5</p>
                     <button class="removePiece">X</button>
@@ -57,10 +57,12 @@
                     <p>Brahms Symphony 2</p>
                     <button class="removePiece">X</button>
                 </div>
-                <div class="list-piece" draggable="true">
-                    <p>Bach Badinerie</p>
-                    <button class="removePiece">X</button>
-                </div>
+                <template id="list-piece-template">
+                    <div class="list-piece" draggable="true">
+                        <p></p>
+                        <button class="removePiece">X</button>
+                    </div>
+                </template>
             </div>
         </aside>
     </section>
