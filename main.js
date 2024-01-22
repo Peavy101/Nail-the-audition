@@ -3,7 +3,7 @@ const pieceContainer = document.getElementById("pieces-container")
 const searchInput = document.getElementById("search")
 const draggables = document.querySelectorAll('.list-piece')
 const containers = document.querySelectorAll('.list-container')
-
+const removePieceButtons = document.querySelectorAll('.removePiece')
 
 let pieces = []
 
@@ -84,11 +84,33 @@ fetch("https://api.npoint.io/d1c2bc93f272778194a3")
 
         accordions.forEach((accoTrigger) => {
             accoTrigger.addEventListener('click', () => {
-                console.log("woot!");
-                const content = accoTrigger.querySelector('.accordion-content')
-                content.classList.toggle('hide');
+                if(!isMouseOverButton){
+                    console.log("woot!");
+                    const content = accoTrigger.querySelector('.accordion-content')
+                    content.classList.toggle('hide');
+                }
             });
         });
+        const addPieceButtons = document.querySelectorAll('.addPiece')
+        let isMouseOverButton = false;
+        
+        addPieceButtons.forEach(button => {
+            button.addEventListener('mouseenter', () => {
+                isMouseOverButton=true;
+            })
+        })
+        
+        addPieceButtons.forEach(button => {
+            button.addEventListener('mouseleave', () => {
+                isMouseOverButton=false;
+            })
+        })
+
+        addPieceButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                console.log('ok')
+            })
+        })
     });
 
 
@@ -106,6 +128,7 @@ containers.forEach(container => {
     container.addEventListener('dragover', e => {
         e.preventDefault()
         const afterElement = getDragAfterElement(container, e.clientY)
+        console.log(afterElement)
         const draggable = document.querySelector('.dragging')
         if (afterElement == null) {
             container.appendChild(draggable)
@@ -117,9 +140,10 @@ containers.forEach(container => {
 
 function getDragAfterElement(container, y) {
     const draggableElements = [...container.querySelectorAll('.draggable:not(.dragging)')]
-    
+
     return draggableElements.reduce((closest, child) => {
         const box = child.getBoundingClientRect()
+        console.log(box)
         const offset = y - box.top - box.height / 2
         if (offset < 0 && offset > closest.offset) {
         return { offset: offset, element: child }
@@ -128,3 +152,12 @@ function getDragAfterElement(container, y) {
         }
     }, { offset: Number.NEGATIVE_INFINITY }).element
     }
+
+removePieceButtons.forEach(button => {
+    button.addEventListener('click', () => {
+        console.log('youre on to something')
+
+        const parentElement = button.parentNode;
+        parentElement.remove();
+    })
+})

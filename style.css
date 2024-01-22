@@ -126,7 +126,7 @@ aside {
     align-items: center;
     padding: 20px;
     border: 1px solid black;
-    height: 5px;
+    height: auto;
     margin-bottom: 10px;
     cursor: move;
 }
