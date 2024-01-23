@@ -77,58 +77,62 @@ fetch("https://api.npoint.io/d1c2bc93f272778194a3")
             //pieceSheet.setAttribute('src', pieceData.link);
 
             pieceContainer.appendChild(pieceNode);
-            return { title: pieceData.title, composer: pieceData.composer, genre: pieceData.genre, element: pieceElement };
-        });
 
-        let accordions = document.querySelectorAll('.piece');
-
-        accordions.forEach((accoTrigger) => {
-            accoTrigger.addEventListener('click', () => {
+            pieceElement.addEventListener('click', () => {
                 if(!isMouseOverButton){
                     console.log("woot!");
-                    const content = accoTrigger.querySelector('.accordion-content')
+                    const content = pieceElement.querySelector('.accordion-content')
                     content.classList.toggle('hide');
                 }
             });
-        });
-        const addPieceButtons = document.querySelectorAll('.addPiece')
-        let isMouseOverButton = false;
 
-        addPieceButtons.forEach(button => {
-            button.addEventListener('mouseenter', () => {
+            let isMouseOverButton = false;
+
+            const pieceButton = pieceElement.querySelector('.addPiece')
+
+            pieceButton.addEventListener('mouseenter', () => {
                 isMouseOverButton=true;
             })
-        })
-        
-        addPieceButtons.forEach(button => {
-            button.addEventListener('mouseleave', () => {
+
+            pieceButton.addEventListener('mouseleave', () => {
                 isMouseOverButton=false;
             })
-        })
 
-        addPieceButtons.forEach(button => {
-            button.addEventListener('click', () => {
-                console.log('ok')
-
-                const listPiece_id = Math.random(1000)/toString(36).substring(7);
+            pieceButton.addEventListener('click', () => {
+                console.log(pieceTitle)
+                pieceTitleText = pieceTitle.textContent;
+    
+                const listPiece_id = Math.random(1000).toString(36).substring(7);
                 const pieceWrapper = document.createElement("div");
                 pieceWrapper.setAttribute('id', listPiece_id);
                 
                 const pieceText = document.createElement("p");
-
+                pieceText.innerText = pieceTitleText;
+    
                 const removePieceButton = document.createElement("button");
                 removePieceButton.innerText = "x";
                 removePieceButton.setAttribute('class', "removePiece");
-
+    
                 pieceWrapper.appendChild(pieceText);
                 pieceWrapper.appendChild(removePieceButton);
 
                 listContainer.appendChild(pieceWrapper);
+
+                removePieceButton.addEventListener('click', () => {
+                    console.log('youre on to something')
+            
+                    const parentElement = removePieceButton.parentNode;
+                    parentElement.remove();
+                })
             })
-        })
+
+            
+            
+            return { title: pieceData.title, composer: pieceData.composer, genre: pieceData.genre, element: pieceElement };
+        });
     });
 
-
+///THIS IS ALL GOING INTO THE ADD PIECE FUNCTION THING
 draggables.forEach(draggable => {
     draggable.addEventListener('dragstart', () => {
         draggable.classList.add('dragging')
@@ -152,19 +156,18 @@ listContainer.addEventListener('dragover', e => {
 })
 
 
-// containers.forEach(container => {
-//     container.addEventListener('dragover', e => {
-//         e.preventDefault()
-//         const afterElement = getDragAfterElement(container, e.clientY)
-//         console.log(afterElement)
-//         const draggable = document.querySelector('.dragging')
-//         if (afterElement == null) {
-//             container.appendChild(draggable)
-//         } else {
-//             container.insertBefore(draggable, afterElement)
-//         }
-//     })
-// })
+listContainer.addEventListener('dragover', e => {
+    e.preventDefault()
+    const afterElement = getDragAfterElement(listContainer, e.clientY)
+    console.log(afterElement)
+    const draggable = document.querySelector('.dragging')
+    if (afterElement == null) {
+        listContainer.appendChild(draggable)
+    } else {
+        listContainer.insertBefore(draggable, afterElement)
+    }
+})
+
 
 function getDragAfterElement(container, y) {
     const draggableElements = [...container.querySelectorAll('.draggable:not(.dragging)')]
@@ -181,11 +184,3 @@ function getDragAfterElement(container, y) {
     }, { offset: Number.NEGATIVE_INFINITY }).element
     }
 
-removePieceButtons.forEach(button => {
-    button.addEventListener('click', () => {
-        console.log('youre on to something')
-
-        const parentElement = button.parentNode;
-        parentElement.remove();
-    })
-})
