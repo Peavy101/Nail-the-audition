@@ -99,15 +99,17 @@ fetch("https://api.npoint.io/d1c2bc93f272778194a3")
             })
 
             pieceButton.addEventListener('click', () => {
-                console.log(pieceTitle)
+                pieceComposerText = pieceComposer.textContent;
                 pieceTitleText = pieceTitle.textContent;
     
                 const listPiece_id = Math.random(1000).toString(36).substring(7);
                 const pieceWrapper = document.createElement("div");
                 pieceWrapper.setAttribute('id', listPiece_id);
+                pieceWrapper.setAttribute('class', "list-piece");
+                pieceWrapper.setAttribute('draggable', true);
                 
                 const pieceText = document.createElement("p");
-                pieceText.innerText = pieceTitleText;
+                pieceText.innerText = pieceComposerText + " " + pieceTitleText;
     
                 const removePieceButton = document.createElement("button");
                 removePieceButton.innerText = "x";
@@ -124,63 +126,96 @@ fetch("https://api.npoint.io/d1c2bc93f272778194a3")
                     const parentElement = removePieceButton.parentNode;
                     parentElement.remove();
                 })
+                drag();
             })
-
-            
-            
             return { title: pieceData.title, composer: pieceData.composer, genre: pieceData.genre, element: pieceElement };
         });
     });
 
 ///THIS IS ALL GOING INTO THE ADD PIECE FUNCTION THING
-draggables.forEach(draggable => {
-    draggable.addEventListener('dragstart', () => {
-        draggable.classList.add('dragging')
-    })
+// function drag() {
+//     pieceWrapper = document.querySelectorAll('.list-piece')
 
-    draggable.addEventListener('dragend', () => {
-        draggable.classList.remove('dragging')
-    })
-})
+//     pieceWrapper.forEach(pieceWrapper => {
+//         pieceWrapper.addEventListener('dragstart', () => {
+//             pieceWrapper.classList.add('dragging')
+//         })
+    
+//         pieceWrapper.addEventListener('dragend', () => {
+//             pieceWrapper.classList.remove('dragging')
+//         })
+//     })
 
-listContainer.addEventListener('dragover', e => {
-    e.preventDefault()
-    const afterElement = getDragAfterElement(listContainer, e.clientY)
-    console.log(afterElement)
-    const draggable = document.querySelector('.dragging')
-    if (afterElement == null) {
-        listContainer.appendChild(draggable)
-    } else {
-        listContainer.insertBefore(draggable, afterElement)
-    }
-})
+//     listContainer.addEventListener('dragover', e => {
+//         e.preventDefault()
+//         const afterElement = getDragAfterElement(listContainer, e.clientY)
+//         console.log(afterElement)
+//         const draggable = document.querySelector('.dragging')
+//         if (afterElement == null) {
+//             listContainer.appendChild(draggable)
+//         } else {
+//             listContainer.insertBefore(draggable, afterElement)
+//         }
+//     })
+    
+//     function getDragAfterElement(container, y) {
+//         const draggableElements = [...container.querySelectorAll('.draggable:not(.dragging)')]
+    
+//         return draggableElements.reduce((closest, child) => {
+//             const box = child.getBoundingClientRect()
+//             const offset = y - box.top - box.height / 2
+//             if (offset < 0 && offset > closest.offset) {
+//             return { offset: offset, element: child }
+//             } else {
+//             return closest
+//             }
+//         }, { offset: Number.NEGATIVE_INFINITY }).element
+//         }
+// }
 
 
-listContainer.addEventListener('dragover', e => {
-    e.preventDefault()
-    const afterElement = getDragAfterElement(listContainer, e.clientY)
-    console.log(afterElement)
-    const draggable = document.querySelector('.dragging')
-    if (afterElement == null) {
-        listContainer.appendChild(draggable)
-    } else {
-        listContainer.insertBefore(draggable, afterElement)
-    }
-})
+function drag() {
+    const pieceWrappers = document.querySelectorAll('.list-piece');
+    let draggedElement = null;
 
+    pieceWrappers.forEach(pieceWrapper => {
+        pieceWrapper.addEventListener('dragstart', () => {
+            draggedElement = pieceWrapper;
+            pieceWrapper.classList.add('dragging');
+        });
 
-function getDragAfterElement(container, y) {
-    const draggableElements = [...container.querySelectorAll('.draggable:not(.dragging)')]
+        pieceWrapper.addEventListener('dragend', () => {
+            pieceWrapper.classList.remove('dragging');
+            draggedElement = null;
+        });
+    });
 
-    return draggableElements.reduce((closest, child) => {
-        const box = child.getBoundingClientRect()
-        console.log(box)
-        const offset = y - box.top - box.height / 2
-        if (offset < 0 && offset > closest.offset) {
-        return { offset: offset, element: child }
+    listContainer.addEventListener('dragover', e => {
+        e.preventDefault();
+        const afterElement = getDragAfterElement(listContainer, e.clientY);
+        const draggable = document.querySelector('.dragging');
+
+        if (afterElement) {
+            afterElement.parentNode.insertBefore(draggable, afterElement.nextSibling);
         } else {
-        return closest
+            listContainer.appendChild(draggable);
         }
-    }, { offset: Number.NEGATIVE_INFINITY }).element
-    }
+    });
 
+    function getDragAfterElement(container, y) {
+        const draggableElements = [...container.querySelectorAll('.list-piece:not(.dragging)')];
+
+        return draggableElements.reduce((closest, child) => {
+            const box = child.getBoundingClientRect();
+            const offset = y - box.top - box.height / 2;
+
+            console.log(offset)
+
+            if (offset < 0 && offset > closest.offset) {
+                return { offset: offset, element: child };
+            } else {
+                return closest;
+            }
+        }, { offset: Number.NEGATIVE_INFINITY }).element;
+    }
+}
