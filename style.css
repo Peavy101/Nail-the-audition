@@ -151,9 +151,19 @@ h3 {
 
 .audition-list-bottom {
     display: flex;
+    flex-direction: column;
     justify-content: center;
+    align-items: center;
 }
 
 #combinedPdfsFrame {
-    height: 450px;
+    display: none;
+    height: 425px;
+    border: 5px solid #323639;
+
+}
+
+#combinePDFS {
+    margin-top: 15px;
+    width: 50%;
 }

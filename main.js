@@ -179,8 +179,6 @@ function drag() {
     }
 }
 
-
-
 async function combinePDFS() {
     const childDivs = listContainer.querySelectorAll('div')
 
@@ -204,7 +202,9 @@ async function combinePDFS() {
     const pdfBytes = await combinedPdfDoc.save();
 
     const pdfIframe = document.getElementById('combinedPdfsFrame');
+    pdfIframe.setAttribute('style', "display: block;")
     pdfIframe.setAttribute('src', URL.createObjectURL(new Blob([pdfBytes], { type: 'application/pdf' })))
+    //if you want it to download immediately uncomment below
     // download(combinedPdfDoc, "combinedPDF", "application/pdf");
 
     console.log(ids);
