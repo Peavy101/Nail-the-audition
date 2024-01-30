@@ -3,6 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <script src="https://unpkg.com/pdf-lib@1.4.0"></script>
+    <script src="https://unpkg.com/downloadjs@1.4.7"></script> -->
+    <script src="https://unpkg.com/pdf-lib"></script>
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Inconsolata&display=swap" rel="stylesheet">
     <title>Nail the Audition</title>
@@ -47,11 +50,12 @@
             </template>
         </div>
         <aside>
-            <h3>Audition List</h3>
+            <h3>Audition List</h3>      
             <div id="list-container">
             </div>
             <div class="audition-list-bottom">
-                <button id="combinePDFS">Combine PDFS!</button>
+                <iframe src="" id="combinedPdfsFrame"frameborder="0"></iframe>
+                <button id="combinePDFS" onclick="combinePDFS()">Combine PDFS!</button>
             </div>
         </aside>
     </section>

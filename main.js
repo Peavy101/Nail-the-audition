@@ -1,3 +1,5 @@
+const { PDFDocument } = PDFLib
+
 const pieceTemplate = document.getElementById("data-piece-template")
 const pieceContainer = document.getElementById("pieces-container")
 const searchInput = document.getElementById("search")
@@ -74,7 +76,7 @@ fetch("https://api.npoint.io/d1c2bc93f272778194a3")
             pieceGenre.innerHTML = pieceData.genre;
 
             // Attach the PDF link from the API into the 'src' attribute of our template's iframe
-            //pieceSheet.setAttribute('src', pieceData.link);
+            pieceSheet.setAttribute('src', pieceData.link);
 
             pieceContainer.appendChild(pieceNode);
 
@@ -99,10 +101,11 @@ fetch("https://api.npoint.io/d1c2bc93f272778194a3")
             })
 
             pieceButton.addEventListener('click', () => {
+                
                 pieceComposerText = pieceComposer.textContent;
                 pieceTitleText = pieceTitle.textContent;
     
-                const listPiece_id = Math.random(1000).toString(36).substring(7);
+                const listPiece_id = pieceData.link;
                 const pieceWrapper = document.createElement("div");
                 pieceWrapper.setAttribute('id', listPiece_id);
                 pieceWrapper.setAttribute('class', "list-piece");
@@ -121,8 +124,6 @@ fetch("https://api.npoint.io/d1c2bc93f272778194a3")
                 listContainer.appendChild(pieceWrapper);
 
                 removePieceButton.addEventListener('click', () => {
-                    console.log('youre on to something')
-            
                     const parentElement = removePieceButton.parentNode;
                     parentElement.remove();
                 })
@@ -131,48 +132,6 @@ fetch("https://api.npoint.io/d1c2bc93f272778194a3")
             return { title: pieceData.title, composer: pieceData.composer, genre: pieceData.genre, element: pieceElement };
         });
     });
-
-///THIS IS ALL GOING INTO THE ADD PIECE FUNCTION THING
-// function drag() {
-//     pieceWrapper = document.querySelectorAll('.list-piece')
-
-//     pieceWrapper.forEach(pieceWrapper => {
-//         pieceWrapper.addEventListener('dragstart', () => {
-//             pieceWrapper.classList.add('dragging')
-//         })
-    
-//         pieceWrapper.addEventListener('dragend', () => {
-//             pieceWrapper.classList.remove('dragging')
-//         })
-//     })
-
-//     listContainer.addEventListener('dragover', e => {
-//         e.preventDefault()
-//         const afterElement = getDragAfterElement(listContainer, e.clientY)
-//         console.log(afterElement)
-//         const draggable = document.querySelector('.dragging')
-//         if (afterElement == null) {
-//             listContainer.appendChild(draggable)
-//         } else {
-//             listContainer.insertBefore(draggable, afterElement)
-//         }
-//     })
-    
-//     function getDragAfterElement(container, y) {
-//         const draggableElements = [...container.querySelectorAll('.draggable:not(.dragging)')]
-    
-//         return draggableElements.reduce((closest, child) => {
-//             const box = child.getBoundingClientRect()
-//             const offset = y - box.top - box.height / 2
-//             if (offset < 0 && offset > closest.offset) {
-//             return { offset: offset, element: child }
-//             } else {
-//             return closest
-//             }
-//         }, { offset: Number.NEGATIVE_INFINITY }).element
-//         }
-// }
-
 
 function drag() {
     const pieceWrappers = document.querySelectorAll('.list-piece');
@@ -218,4 +177,35 @@ function drag() {
             }
         }, { offset: Number.NEGATIVE_INFINITY }).element;
     }
+}
+
+
+
+async function combinePDFS() {
+    const childDivs = listContainer.querySelectorAll('div')
+
+    const ids = [];
+
+    childDivs.forEach(childDiv => {
+        ids.push(childDiv.id);
+    })
+
+    const combinedPdfDoc = await PDFDocument.create();
+
+    for (const id of ids) {
+        const donorPDFBytes = await fetch(id).then(res => res.arrayBuffer())
+        const donorPdfDoc = await PDFDocument.load(donorPDFBytes)
+
+        const [donorPages] = await combinedPdfDoc.copyPages(donorPdfDoc, [0])
+
+        combinedPdfDoc.addPage(donorPages)
+    }
+
+    const pdfBytes = await combinedPdfDoc.save();
+
+    const pdfIframe = document.getElementById('combinedPdfsFrame');
+    pdfIframe.setAttribute('src', URL.createObjectURL(new Blob([pdfBytes], { type: 'application/pdf' })))
+    // download(combinedPdfDoc, "combinedPDF", "application/pdf");
+
+    console.log(ids);
 }

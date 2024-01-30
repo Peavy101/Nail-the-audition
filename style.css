@@ -153,3 +153,7 @@ h3 {
     display: flex;
     justify-content: center;
 }
+
+#combinedPdfsFrame {
+    height: 450px;
+}
