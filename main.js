@@ -9,6 +9,14 @@ const removePieceButtons = document.querySelectorAll('.removePiece')
 
 let pieces = []
 
+const sample_array = [0, {a: 1, b: 2}, 2, 3]
+
+const sample_object = {a: 1, b: 2 }
+
+let piece_excerpts = {}
+
+piece_excerpts["./scores/BachOrchestralSuite2.pdf"] = [1, 2];
+
 // Retrieves all UL elements in the Nav Bar
 const nav_links = document.querySelectorAll('ul')
 // Retrieve all Section elements which are the 'pages' of our app
@@ -117,9 +125,15 @@ fetch("https://api.npoint.io/d1c2bc93f272778194a3")
                 const removePieceButton = document.createElement("button");
                 removePieceButton.innerText = "x";
                 removePieceButton.setAttribute('class', "removePiece");
+
+                const copyFullPDFCheckBox = document.createElement("input");
+                copyFullPDFCheckBox.type = "checkbox";
+                
+                // copyFullPDFCheckBox.setAttribute('class', "removePiece");
     
                 pieceWrapper.appendChild(pieceText);
                 pieceWrapper.appendChild(removePieceButton);
+                pieceWrapper.appendChild(copyFullPDFCheckBox);
 
                 listContainer.appendChild(pieceWrapper);
 
@@ -182,28 +196,38 @@ function drag() {
 async function combinePDFS() {
     const childDivs = listContainer.querySelectorAll('div')
 
-    const ids = [];
+    //  [
+    //    {
+    //      id: "./scores/BachOrchestralSuite2.pdf",
+    //      shouldCopyFullPiece: true
+    //    }
+    //  ]
+    const piecesMetadata = [];
 
     childDivs.forEach(childDiv => {
-        ids.push(childDiv.id);
+        const pieceInfo = {
+            id: childDiv.id,
+            shouldCopyFullPiece: childDiv.querySelector('input[type="checkbox"]').checked,
+        }
+        piecesMetadata.push(pieceInfo);
     })
 
     const combinedPdfDoc = await PDFDocument.create();
 
-    for (const id of ids) {
-
-        //get info on page range and excerpt page range 
-        //write if statement about if the bullet is checked to decide whether to use full page range or excerpt
-
-
-        const donorPDFBytes = await fetch(id).then(res => res.arrayBuffer())
+    for (const metadata of piecesMetadata) {
+        const donorPDFBytes = await fetch(metadata.id).then(res => res.arrayBuffer())
         const donorPdfDoc = await PDFDocument.load(donorPDFBytes)
 
-        const [donorPages] = await combinedPdfDoc.copyPages(donorPdfDoc, [0])
+        const indices_to_copy = metadata.shouldCopyFullPiece ? donorPdfDoc.getPageIndices() : piece_excerpts[metadata.id]
 
-        combinedPdfDoc.addPage(donorPages)
+        const donorPages = await combinedPdfDoc.copyPages(donorPdfDoc, indices_to_copy)
+
+        donorPages.forEach(page => {
+            combinedPdfDoc.addPage(page)
+        })
     }
 
+    const PDF_pages = await combinedPdfDoc.getPages()
     const pdfBytes = await combinedPdfDoc.save();
 
     const pdfIframe = document.getElementById('combinedPdfsFrame');
@@ -212,5 +236,5 @@ async function combinePDFS() {
     //if you want it to download immediately uncomment below
     // download(combinedPdfDoc, "combinedPDF", "application/pdf");
 
-    console.log(ids);
+    console.log(piecesMetadata.map(piece => piece.id));
 }
