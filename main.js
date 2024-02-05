@@ -191,6 +191,11 @@ async function combinePDFS() {
     const combinedPdfDoc = await PDFDocument.create();
 
     for (const id of ids) {
+
+        //get info on page range and excerpt page range 
+        //write if statement about if the bullet is checked to decide whether to use full page range or excerpt
+
+
         const donorPDFBytes = await fetch(id).then(res => res.arrayBuffer())
         const donorPdfDoc = await PDFDocument.load(donorPDFBytes)
 
