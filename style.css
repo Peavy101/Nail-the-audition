@@ -52,7 +52,7 @@ h2 {
     border: 1px solid black;
     padding: 15px;
     margin-top: 35px;
-    width: 400px;
+    width: 85%;
     cursor: pointer;
 }
 
@@ -111,7 +111,7 @@ h2 {
     align-items: center;
     align-self: flex-start;
     border-right: 1px dashed black;
-    width: 50vw;
+    width: 60%;
 }
 
 #library {
@@ -122,9 +122,9 @@ h2 {
 aside {
     border: 1px solid black;
     align-self: flex-start;
-    width: 350px;
+    width: 40%;
     padding: 25px;
-    margin: 45px;
+    margin: 35px;
 }
 
 .list-piece {

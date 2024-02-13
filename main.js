@@ -15,7 +15,19 @@ const sample_object = {a: 1, b: 2 }
 
 let piece_excerpts = {}
 
-piece_excerpts["./scores/BachOrchestralSuite2.pdf"] = [1, 2];
+piece_excerpts["./scores/BachOrchestralSuite2.pdf"] = [3];
+piece_excerpts["./scores/BeethovenSymphony5.pdf"] = [5, 6, 7];
+piece_excerpts["./scores/BerliozSymphonieFantastique.pdf"] = [12];
+piece_excerpts["./scores/BrahmsSymphony1.pdf"] = [1];
+piece_excerpts["./scores/BrahmsSymphony2.pdf"] = [0, 1];
+piece_excerpts["./scores/MahlerSymphony1.pdf"] = [5];
+piece_excerpts["./scores/MahlerSymphony2.pdf"] = [0];
+piece_excerpts["./scores/MozartSymphony39.pdf"] = [0];
+piece_excerpts["./scores/MozartSymphony40.pdf"] = [1, 2];
+piece_excerpts["./scores/MussorgskyRavelPicturesAtAnExhibition.pdf"] = [4];
+piece_excerpts["./scores/StraussDonJuan.pdf"] = [0];
+piece_excerpts["./scores/StraussHeldenleben.pdf"] = [1];
+
 
 // Retrieves all UL elements in the Nav Bar
 const nav_links = document.querySelectorAll('ul')
@@ -126,14 +138,21 @@ fetch("https://api.npoint.io/d1c2bc93f272778194a3")
                 removePieceButton.innerText = "x";
                 removePieceButton.setAttribute('class', "removePiece");
 
+                const checkBoxContainer = document.createElement("div");
+                checkBoxContainer.setAttribute('class', "checkBoxContainer");
+                const checkBoxText = document.createElement("p");
+                checkBoxText.innerText = "Full Piece?";
                 const copyFullPDFCheckBox = document.createElement("input");
                 copyFullPDFCheckBox.type = "checkbox";
+
+                checkBoxContainer.appendChild(checkBoxText);
+                checkBoxContainer.appendChild(copyFullPDFCheckBox);
                 
                 // copyFullPDFCheckBox.setAttribute('class', "removePiece");
     
                 pieceWrapper.appendChild(pieceText);
                 pieceWrapper.appendChild(removePieceButton);
-                pieceWrapper.appendChild(copyFullPDFCheckBox);
+                pieceWrapper.appendChild(checkBoxContainer);
 
                 listContainer.appendChild(pieceWrapper);
 
@@ -169,7 +188,7 @@ function drag() {
         const draggable = document.querySelector('.dragging');
 
         if (afterElement) {
-            afterElement.parentNode.insertBefore(draggable, afterElement.nextSibling);
+            afterElement.parentNode.insertBefore(draggable, afterElement);
         } else {
             listContainer.appendChild(draggable);
         }
@@ -195,7 +214,6 @@ function drag() {
 
 async function combinePDFS() {
     const childDivs = listContainer.querySelectorAll('div')
-
     //  [
     //    {
     //      id: "./scores/BachOrchestralSuite2.pdf",
