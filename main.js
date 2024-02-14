@@ -132,6 +132,7 @@ fetch("https://api.npoint.io/d1c2bc93f272778194a3")
                 pieceWrapper.setAttribute('draggable', true);
                 
                 const pieceText = document.createElement("p");
+                pieceText.setAttribute('class', "pieceText")
                 pieceText.innerText = pieceComposerText + " " + pieceTitleText;
     
                 const removePieceButton = document.createElement("button");
@@ -142,17 +143,16 @@ fetch("https://api.npoint.io/d1c2bc93f272778194a3")
                 checkBoxContainer.setAttribute('class', "checkBoxContainer");
                 const checkBoxText = document.createElement("p");
                 checkBoxText.innerText = "Full Piece?";
+                checkBoxText.setAttribute('class', "fullPieceText")
                 const copyFullPDFCheckBox = document.createElement("input");
                 copyFullPDFCheckBox.type = "checkbox";
 
                 checkBoxContainer.appendChild(checkBoxText);
                 checkBoxContainer.appendChild(copyFullPDFCheckBox);
-                
-                // copyFullPDFCheckBox.setAttribute('class', "removePiece");
     
                 pieceWrapper.appendChild(pieceText);
-                pieceWrapper.appendChild(removePieceButton);
                 pieceWrapper.appendChild(checkBoxContainer);
+                pieceWrapper.appendChild(removePieceButton);
 
                 listContainer.appendChild(pieceWrapper);
 
@@ -214,12 +214,6 @@ function drag() {
 
 async function combinePDFS() {
     const childDivs = listContainer.querySelectorAll('div')
-    //  [
-    //    {
-    //      id: "./scores/BachOrchestralSuite2.pdf",
-    //      shouldCopyFullPiece: true
-    //    }
-    //  ]
     const piecesMetadata = [];
 
     childDivs.forEach(childDiv => {

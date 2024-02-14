@@ -8,6 +8,10 @@ body, section {
     font-family: Inconsolata;
 }
 
+.page {
+    width: 100%;
+}
+
 h1 {
     display: flex;
     justify-content: left;
@@ -43,6 +47,10 @@ h2 {
 
 .pieces {
     padding-bottom: 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 .piece {
@@ -147,6 +155,10 @@ h3 {
     border-bottom: 1px solid black;
 }
 
+.pieceText {
+    width: 50%;
+}
+
 .removePiece {
     height: 50%;
     display: flex;
@@ -178,9 +190,10 @@ button {
     font-family: Inconsolata;
 }
 
-/* this is where I will add responsiveness */
-/* @media screen and (max-width:950px){
-    .piece {
-        width: 350px;
-    }
-} */
+.checkBoxContainer {
+    display: flex;
+}
+
+.fullPieceText{
+    font-size: x-small;
+}
