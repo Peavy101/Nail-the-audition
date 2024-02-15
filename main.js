@@ -13,20 +13,42 @@ const sample_array = [0, {a: 1, b: 2}, 2, 3]
 
 const sample_object = {a: 1, b: 2 }
 
-let piece_excerpts = {}
+// PROBLEM 1: Need to identify the piece by the id of the overall object
 
-piece_excerpts["./scores/BachOrchestralSuite2.pdf"] = [3];
-piece_excerpts["./scores/BeethovenSymphony5.pdf"] = [5, 6, 7];
-piece_excerpts["./scores/BerliozSymphonieFantastique.pdf"] = [12];
-piece_excerpts["./scores/BrahmsSymphony1.pdf"] = [1];
-piece_excerpts["./scores/BrahmsSymphony2.pdf"] = [0, 1];
-piece_excerpts["./scores/MahlerSymphony1.pdf"] = [5];
-piece_excerpts["./scores/MahlerSymphony2.pdf"] = [0];
-piece_excerpts["./scores/MozartSymphony39.pdf"] = [0];
-piece_excerpts["./scores/MozartSymphony40.pdf"] = [1, 2];
-piece_excerpts["./scores/MussorgskyRavelPicturesAtAnExhibition.pdf"] = [4];
-piece_excerpts["./scores/StraussDonJuan.pdf"] = [0];
-piece_excerpts["./scores/StraussHeldenleben.pdf"] = [1];
+// PROBLEM 2: Need to store ALL excerpt variations for a particular piece
+// along with a text representation of that exceprt type
+// Piece_name: 
+//  exceprt_1 -> values for excerpt 1
+
+// Problem 3: Need to cleanly iterate through each key value pair for each excerpt
+// to dynamically generate the required options in our select
+
+let piece_excerpts = 
+{
+    'sample_piece': [
+        {full_piece: null},
+        {excerpt_1: [3]},
+        {excerpt_2: [3, 4]},
+        {excerpt_3: [3, 4, 5]}
+    ],
+    './scores/BachOrchestralSuite2.pdf': [
+        {full_piece: null},
+        {exceprt_1: [3]}
+    ]
+}
+
+// piece_excerpts["./scores/BachOrchestralSuite2.pdf"] = [3];
+// piece_excerpts["./scores/BeethovenSymphony5.pdf"] = [5, 6, 7];
+// piece_excerpts["./scores/BerliozSymphonieFantastique.pdf"] = [12];
+// piece_excerpts["./scores/BrahmsSymphony1.pdf"] = [1];
+// piece_excerpts["./scores/BrahmsSymphony2.pdf"] = [0, 1];
+// piece_excerpts["./scores/MahlerSymphony1.pdf"] = [5];
+// piece_excerpts["./scores/MahlerSymphony2.pdf"] = [0];
+// piece_excerpts["./scores/MozartSymphony39.pdf"] = [0];
+// piece_excerpts["./scores/MozartSymphony40.pdf"] = [1, 2];
+// piece_excerpts["./scores/MussorgskyRavelPicturesAtAnExhibition.pdf"] = [4];
+// piece_excerpts["./scores/StraussDonJuan.pdf"] = [0];
+// piece_excerpts["./scores/StraussHeldenleben.pdf"] = [1];
 
 
 // Retrieves all UL elements in the Nav Bar
@@ -139,19 +161,33 @@ fetch("https://api.npoint.io/d1c2bc93f272778194a3")
                 removePieceButton.innerText = "x";
                 removePieceButton.setAttribute('class', "removePiece");
 
-                const checkBoxContainer = document.createElement("div");
-                checkBoxContainer.setAttribute('class', "checkBoxContainer");
-                const checkBoxText = document.createElement("p");
-                checkBoxText.innerText = "Full Piece?";
-                checkBoxText.setAttribute('class', "fullPieceText")
-                const copyFullPDFCheckBox = document.createElement("input");
-                copyFullPDFCheckBox.type = "checkbox";
+                // const checkBoxContainer = document.createElement("div");
+                // checkBoxContainer.setAttribute('class', "checkBoxContainer");
+                // const checkBoxText = document.createElement("p");
+                // checkBoxText.innerText = "Full Piece?";
+                // checkBoxText.setAttribute('class', "fullPieceText")
+                // const copyFullPDFCheckBox = document.createElement("input");
+                // copyFullPDFCheckBox.setAttribute('id', listPiece_id);
+                // copyFullPDFCheckBox.type = "checkbox";
 
-                checkBoxContainer.appendChild(checkBoxText);
-                checkBoxContainer.appendChild(copyFullPDFCheckBox);
-    
+                const excerptSelect = document.createElement('select');
+                excerptSelect.setAttribute('id', listPiece_id);
+                const excerpt_options = piece_excerpts[listPiece_id] ?? [];
+                excerpt_options.forEach(
+                    excerpt_option => {
+                        const option = document.createElement('option');
+                        option.value = Object.values(excerpt_option)[0]
+                        option.innerText = Object.keys(excerpt_option)[0]
+                        excerptSelect.appendChild(option)
+                    }
+                )
+
+                // checkBoxContainer.appendChild(checkBoxText);
+                // checkBoxContainer.appendChild(copyFullPDFCheckBox);
+
                 pieceWrapper.appendChild(pieceText);
-                pieceWrapper.appendChild(checkBoxContainer);
+                // pieceWrapper.appendChild(checkBoxContainer);
+                pieceWrapper.appendChild(excerptSelect);
                 pieceWrapper.appendChild(removePieceButton);
 
                 listContainer.appendChild(pieceWrapper);
@@ -213,16 +249,25 @@ function drag() {
 }
 
 async function combinePDFS() {
-    const childDivs = listContainer.querySelectorAll('div')
+    const pieceSelects = listContainer.querySelectorAll('select')
     const piecesMetadata = [];
 
-    childDivs.forEach(childDiv => {
+    pieceSelects.forEach(select => {
+
+        const excerpt_values = []
+
+        select.value.split(',').forEach(
+            value => excerpt_values.push(Number(value))
+        );
+
         const pieceInfo = {
-            id: childDiv.id,
-            shouldCopyFullPiece: childDiv.querySelector('input[type="checkbox"]').checked,
+            id: select.id,
+            excerpt_value: excerpt_values,
         }
         piecesMetadata.push(pieceInfo);
     })
+
+    console.log(piecesMetadata);
 
     const combinedPdfDoc = await PDFDocument.create();
 
@@ -230,7 +275,7 @@ async function combinePDFS() {
         const donorPDFBytes = await fetch(metadata.id).then(res => res.arrayBuffer())
         const donorPdfDoc = await PDFDocument.load(donorPDFBytes)
 
-        const indices_to_copy = metadata.shouldCopyFullPiece ? donorPdfDoc.getPageIndices() : piece_excerpts[metadata.id]
+        const indices_to_copy = metadata.excerpt_value ? donorPdfDoc.getPageIndices() : piece_excerpts[metadata.id]
 
         const donorPages = await combinedPdfDoc.copyPages(donorPdfDoc, indices_to_copy)
 
