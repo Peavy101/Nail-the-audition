@@ -16,9 +16,9 @@ const sample_object = {a: 1, b: 2 }
 // PROBLEM 1: Need to identify the piece by the id of the overall object
 
 // PROBLEM 2: Need to store ALL excerpt variations for a particular piece
-// along with a text representation of that exceprt type
+// along with a text representation of that excerpt type
 // Piece_name: 
-//  exceprt_1 -> values for excerpt 1
+//  excerpt_1 -> values for excerpt 1
 
 // Problem 3: Need to cleanly iterate through each key value pair for each excerpt
 // to dynamically generate the required options in our select
@@ -32,8 +32,13 @@ let piece_excerpts =
         {excerpt_3: [3, 4, 5]}
     ],
     './scores/BachOrchestralSuite2.pdf': [
-        {full_piece: null},
-        {exceprt_1: [3]}
+        {Full_Piece: [0,1,2,3]},
+        {Badinerie: [3]}
+    ],
+    './scores/BeethovenSymphony5.pdf': [
+        {Full_Piece: [0,1,2,3,4,5,6,7,8,9,10,11]},
+        {Second_Movement: [4]},
+        {Scherzo_and_Trio: [5,6,7]}
     ]
 }
 
@@ -161,15 +166,6 @@ fetch("https://api.npoint.io/d1c2bc93f272778194a3")
                 removePieceButton.innerText = "x";
                 removePieceButton.setAttribute('class', "removePiece");
 
-                // const checkBoxContainer = document.createElement("div");
-                // checkBoxContainer.setAttribute('class', "checkBoxContainer");
-                // const checkBoxText = document.createElement("p");
-                // checkBoxText.innerText = "Full Piece?";
-                // checkBoxText.setAttribute('class', "fullPieceText")
-                // const copyFullPDFCheckBox = document.createElement("input");
-                // copyFullPDFCheckBox.setAttribute('id', listPiece_id);
-                // copyFullPDFCheckBox.type = "checkbox";
-
                 const excerptSelect = document.createElement('select');
                 excerptSelect.setAttribute('id', listPiece_id);
                 const excerpt_options = piece_excerpts[listPiece_id] ?? [];
@@ -182,11 +178,7 @@ fetch("https://api.npoint.io/d1c2bc93f272778194a3")
                     }
                 )
 
-                // checkBoxContainer.appendChild(checkBoxText);
-                // checkBoxContainer.appendChild(copyFullPDFCheckBox);
-
                 pieceWrapper.appendChild(pieceText);
-                // pieceWrapper.appendChild(checkBoxContainer);
                 pieceWrapper.appendChild(excerptSelect);
                 pieceWrapper.appendChild(removePieceButton);
 
@@ -267,15 +259,13 @@ async function combinePDFS() {
         piecesMetadata.push(pieceInfo);
     })
 
-    console.log(piecesMetadata);
-
     const combinedPdfDoc = await PDFDocument.create();
 
     for (const metadata of piecesMetadata) {
         const donorPDFBytes = await fetch(metadata.id).then(res => res.arrayBuffer())
         const donorPdfDoc = await PDFDocument.load(donorPDFBytes)
 
-        const indices_to_copy = metadata.excerpt_value ? donorPdfDoc.getPageIndices() : piece_excerpts[metadata.id]
+        const indices_to_copy = metadata.excerpt_value;
 
         const donorPages = await combinedPdfDoc.copyPages(donorPdfDoc, indices_to_copy)
 
