@@ -178,7 +178,7 @@ h3 {
 #combinedPdfsFrame {
     display: none;
     width: 100%;
-    height: 345px;
+    height: 450px;
     border: 5px solid #323639;
 }
 
@@ -202,4 +202,8 @@ button {
 .sheet {
     max-width: 100%;
     height: 420px;
+}
+
+select {
+    width: 35%;
 }

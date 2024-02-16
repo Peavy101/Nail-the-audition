@@ -39,7 +39,62 @@ let piece_excerpts =
         {Full_Piece: [0,1,2,3,4,5,6,7,8,9,10,11]},
         {Second_Movement: [4]},
         {Scherzo_and_Trio: [5,6,7]}
+    ],
+    './scores/BerliozSymphonieFantastique.pdf':[
+        {Full_Piece: [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14]},
+        {Second_Movement_Opening: [4]},
+        {Third_Movement_41: [6,7]},
+        {Fourth_Movement_First_Page: [8]},
+        {Fourth_Movement_ShoeShine: [9,10]},
+        {Witches_Round_Dance: [12]}
+    ],
+    './scores/BrahmsSymphony1.pdf': [
+        {Full_Piece: [0,1,2,3,4,5,6,7,8,9,10]},
+        {First_Page: [0]},
+        {Letter_E: [1]}
+    ],
+    './scores/BrahmsSymphony2.pdf': [
+        {Full_Piece: [0,1,2,3,4,5,6,7,8,9,10]},
+        {Letter_E: [0,1]},
+        {Second_Movement_Letter_C: [4]},
+        {Fourth_Movement_Opening: [6,7]},
+        {Fourth_Movement_Letter_L: [8,9]}
+    ],
+    './scores/MahlerSymphony1.pdf': [
+        {Full_Piece: [0,1,2,3,4,5,6,7,8,9,10,11]},
+        {Third_Movement_Solo: [5]}
+    ],
+    './scores/MahlerSymphony2.pdf': [
+        {Full_Piece: [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19]},
+        {First_Page: [0]}
+    ],
+    './scores/MozartSymphony39.pdf': [
+        {Full_Piece: [0,1,2,3,4,5,6]},
+        {First_Page: [0]},
+        {Fourth_Movement: [5,6]}
+    ],
+    './scores/MozartSymphony40.pdf': [
+        {Full_Piece: [0,1,2,3,4,5,6,7]},
+        {Measure_114: [1]},
+        {Measure_191: [1,2]},
+        {Fourth_Movement: [6,7]}
+    ],
+    './scores/MussorgskyRavelPicturesAtAnExhibition.pdf': [
+        {Full_Piece: [0,1,2,3,4,5,6,7]},
+        {VI_Samuel_Goldenberg_und_Schmuyle: [4]}
+    ],
+    './scores/StraussDonJuan.pdf': [
+        {Full_Piece: [0,1,2,3,4]},
+        {First_Page: [0]},
+        {Letter_F: [1]},
+        {Page_4: [3]}
+    ],
+    './scores/StraussHeldenleben.pdf': [
+        {Full_Piece: [0,1,2,3,4,5,6,7,8,9,10]},
+        {Rehearsal_9: [1]},
+        {Rehearsal_51: [5]}
     ]
+
 }
 
 // piece_excerpts["./scores/BachOrchestralSuite2.pdf"] = [3];
