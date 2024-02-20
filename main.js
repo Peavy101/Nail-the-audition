@@ -6,6 +6,7 @@ const searchInput = document.getElementById("search")
 const draggables = document.querySelectorAll('.list-piece')
 const listContainer = document.getElementById("list-container")
 const removePieceButtons = document.querySelectorAll('.removePiece')
+const auditionList = document.getElementById('auditionList');
 
 let pieces = []
 
@@ -203,7 +204,6 @@ fetch("https://api.npoint.io/d1c2bc93f272778194a3")
             })
 
             pieceButton.addEventListener('click', () => {
-                const auditionList = document.getElementById('auditionList');
                 auditionList.classList.remove('hide');
 
                 pieceComposerText = pieceComposer.textContent;
@@ -341,4 +341,8 @@ async function combinePDFS() {
     // download(combinedPdfDoc, "combinedPDF", "application/pdf");
 
     console.log(piecesMetadata.map(piece => piece.id));
+}
+
+function closeAuditionList() {
+    auditionList.classList.add('hide');
 }

@@ -60,7 +60,7 @@ h2 {
     border: 1px solid black;
     padding: 15px;
     margin-top: 35px;
-    width: 75%;
+    width: 80%;
     cursor: pointer;
 }
 
@@ -123,13 +123,13 @@ h2 {
     justify-content: center;
     align-items: center;
     align-self: flex-start;
-    width: 70%;
+    width: 65%;
 }
 
 aside {
     border: 1px solid black;
     align-self: flex-start;
-    width: 30%;
+    width: 35%;
     padding: 25px;
     margin: 45px;
 }
@@ -159,7 +159,20 @@ h3 {
 }
 
 .removePiece {
-    height: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 30px;
+    height: 30px;
+}
+
+.auditionListTop {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+#auditionListClose {
     display: flex;
     justify-content: center;
     align-items: center;
