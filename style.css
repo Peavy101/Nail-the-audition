@@ -6,6 +6,7 @@ body, section {
     padding: 0;
     margin: 0;
     font-family: Inconsolata;
+    overflow-wrap: break-word;
 }
 
 .page {
@@ -242,6 +243,14 @@ select {
         height: 30px;
     }
 
+    .accordion-trigger {
+        flex-direction: column;
+    }
+
+    .flex-row {
+        flex-direction: column;
+    }
+
     #auditionListClose {
         width: 20px;
         height: 20px;
@@ -268,7 +277,7 @@ select {
     }
 
     select {
-        width: 100px;
+        width: 75px;
         margin-bottom: 8px;
     }
 }
