@@ -205,7 +205,7 @@ fetch("https://api.npoint.io/d1c2bc93f272778194a3")
 
             pieceButton.addEventListener('click', () => {
                 auditionList.classList.remove('hide');
-
+                pieceElement.classList.add('highlight');
                 pieceComposerText = pieceComposer.textContent;
                 pieceTitleText = pieceTitle.textContent;
     
@@ -222,7 +222,6 @@ fetch("https://api.npoint.io/d1c2bc93f272778194a3")
                 const removePieceButton = document.createElement("button");
                 removePieceButton.innerText = "x";
                 removePieceButton.setAttribute('class', "removePiece");
-
                 const excerptSelect = document.createElement('select');
                 excerptSelect.setAttribute('id', listPiece_id);
                 const excerpt_options = piece_excerpts[listPiece_id] ?? [];
@@ -234,15 +233,17 @@ fetch("https://api.npoint.io/d1c2bc93f272778194a3")
                         excerptSelect.appendChild(option)
                     }
                 )
-
                 pieceWrapper.appendChild(pieceText);
                 pieceWrapper.appendChild(excerptSelect);
                 pieceWrapper.appendChild(removePieceButton);
-
                 listContainer.appendChild(pieceWrapper);
 
+                pieceElement.remove()
+                pieceContainer.prepend(pieceElement);
+                
                 removePieceButton.addEventListener('click', () => {
                     const parentElement = removePieceButton.parentNode;
+                    pieceElement.classList.remove('highlight')
                     parentElement.remove();
                 })
                 drag();

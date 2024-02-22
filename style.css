@@ -13,6 +13,13 @@ body, section {
     width: 100%;
 }
 
+#nav-wrapper {
+    width: 90%;
+    height: 120px;
+    margin: 0 auto;
+    padding: 0;
+}
+
 h1 {
     display: flex;
     justify-content: left;
@@ -118,6 +125,10 @@ h2 {
     justify-content: center;
 }
 
+.highlight {
+    border: 5px solid blueviolet;
+}
+
 .librarySide {
     display: flex;
     flex-direction: column;
@@ -221,7 +232,15 @@ select {
     width: 35%;
 }
 
+
 @media screen and (max-width:850px){
+
+    #library:not(.hide) {
+        flex-direction: column-reverse;
+        justify-content: center;
+        align-items: center;
+    }
+
     .search-wrapper {
         display: flex;
         flex-direction: column;
