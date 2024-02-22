@@ -84,7 +84,6 @@ h2 {
     display: flex;
     flex-direction: row;
     width: 75%;
-    text-align: right;
 }
 
 .addPiece {
@@ -258,17 +257,14 @@ select {
         border: 1px solid black;
         padding: 15px;
         margin-top: 35px;
-        width: 75vh;
+        width: 350px;
         cursor: pointer;
+        text-align: left;
     }
 
     .addPiece {
         width: 30px;
         height: 30px;
-    }
-
-    .accordion-trigger {
-        flex-direction: column;
     }
 
     .flex-row {
@@ -296,7 +292,7 @@ select {
         border: 1px solid black;
         padding: 25px;
         margin: 45px;
-        width: 75vh;
+        width: 350px;
         align-self: auto;
     }
 
