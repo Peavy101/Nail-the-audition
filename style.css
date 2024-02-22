@@ -241,6 +241,11 @@ select {
         align-items: center;
     }
 
+    .librarySide {
+        width: 100%;
+    }
+
+
     .search-wrapper {
         display: flex;
         flex-direction: column;
@@ -253,7 +258,7 @@ select {
         border: 1px solid black;
         padding: 15px;
         margin-top: 35px;
-        width: 70%;
+        width: 100%;
         cursor: pointer;
     }
 
@@ -289,10 +294,9 @@ select {
 
     aside {
         border: 1px solid black;
-        align-self: flex-start;
-        width: 25%;
         padding: 25px;
         margin: 45px;
+        align-self: auto;
     }
 
     select {
