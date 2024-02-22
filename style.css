@@ -248,6 +248,12 @@ select {
     .search-wrapper {
         display: flex;
         flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    #search {
+        width: 200px;
     }
 
     .piece {
@@ -257,7 +263,7 @@ select {
         border: 1px solid black;
         padding: 15px;
         margin-top: 35px;
-        width: 350px;
+        width: 325px;
         cursor: pointer;
         text-align: left;
     }
@@ -292,12 +298,16 @@ select {
         border: 1px solid black;
         padding: 25px;
         margin: 45px;
-        width: 350px;
+        width: 325px;
         align-self: auto;
     }
 
     select {
         width: 100px;
         margin-bottom: 8px;
+    }
+
+    .highlight {
+        border: 5px solid blueviolet;
     }
 }
