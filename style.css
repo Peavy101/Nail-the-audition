@@ -258,7 +258,7 @@ select {
         border: 1px solid black;
         padding: 15px;
         margin-top: 35px;
-        width: 100%;
+        width: 75vh;
         cursor: pointer;
     }
 
@@ -276,8 +276,8 @@ select {
     }
 
     #auditionListClose {
-        width: 20px;
-        height: 20px;
+        width: 30px;
+        height: 30px;
     }
 
     .list-piece {
@@ -296,11 +296,12 @@ select {
         border: 1px solid black;
         padding: 25px;
         margin: 45px;
+        width: 75vh;
         align-self: auto;
     }
 
     select {
-        width: 75px;
+        width: 100px;
         margin-bottom: 8px;
     }
 }
