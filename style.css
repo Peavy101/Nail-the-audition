@@ -54,7 +54,7 @@ ul {
 }
 
 h2 {
-    width: 50%;
+    width: 50vh;
     text-align: center;
 }
 
@@ -130,7 +130,7 @@ h2 {
 }
 
 .highlight {
-    border: 5px solid blueviolet;
+    border: 5px solid greenyellow;
 }
 
 .librarySide {
