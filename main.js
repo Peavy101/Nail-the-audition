@@ -7,6 +7,7 @@ const draggables = document.querySelectorAll('.list-piece')
 const listContainer = document.getElementById("list-container")
 const removePieceButtons = document.querySelectorAll('.removePiece')
 const auditionList = document.getElementById('auditionList');
+const downloadPDFButton = document.getElementById('downloadPDF');
 
 let pieces = []
 
@@ -339,12 +340,9 @@ async function combinePDFS() {
     pdfIframe.setAttribute('style', "display: block;")
     pdfIframe.setAttribute('src', URL.createObjectURL(new Blob([pdfBytes], { type: 'application/pdf' })))
     
-    const blob = new Blob([pdfBytes], { type: 'application/pdf' });
-    saveAs(blob, 'audition-list.pdf');
-    
-    // download(combinedPdfDoc, "combinedPDF", "application/pdf");
-
-    console.log(piecesMetadata.map(piece => piece.id));
+    downloadPDFButton.addEventListener('click', () => {
+        download(pdfBytes, "combinedPDF", "application/pdf");
+    })
 }
 
 function closeAuditionList() {
