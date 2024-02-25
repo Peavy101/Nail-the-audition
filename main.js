@@ -338,7 +338,10 @@ async function combinePDFS() {
     const pdfIframe = document.getElementById('combinedPdfsFrame');
     pdfIframe.setAttribute('style', "display: block;")
     pdfIframe.setAttribute('src', URL.createObjectURL(new Blob([pdfBytes], { type: 'application/pdf' })))
-    //if you want it to download immediately uncomment below
+    
+    const blob = new Blob([pdfBytes], { type: 'application/pdf' });
+    saveAs(blob, 'audition-list.pdf');
+    
     // download(combinedPdfDoc, "combinedPDF", "application/pdf");
 
     console.log(piecesMetadata.map(piece => piece.id));

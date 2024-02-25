@@ -210,6 +210,11 @@ h3 {
     width: 50%;
 }
 
+#downloadPDF {
+    margin-top: 15px;
+    width: 50%;
+}
+
 button {
     font-family: Inconsolata;
 }
