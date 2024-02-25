@@ -300,49 +300,55 @@ function drag() {
 }
 
 async function combinePDFS() {
-    const pieceSelects = listContainer.querySelectorAll('select')
-    const piecesMetadata = [];
 
-    pieceSelects.forEach(select => {
+    if (listContainer.innerHTML.trim() !== '') {
+        const pieceSelects = listContainer.querySelectorAll('select')
+        const piecesMetadata = [];
 
-        const excerpt_values = []
+        pieceSelects.forEach(select => {
 
-        select.value.split(',').forEach(
-            value => excerpt_values.push(Number(value))
-        );
+            const excerpt_values = []
 
-        const pieceInfo = {
-            id: select.id,
-            excerpt_value: excerpt_values,
+            select.value.split(',').forEach(
+                value => excerpt_values.push(Number(value))
+            );
+
+            const pieceInfo = {
+                id: select.id,
+                excerpt_value: excerpt_values,
+            }
+            piecesMetadata.push(pieceInfo);
+        })
+
+        const combinedPdfDoc = await PDFDocument.create();
+
+        for (const metadata of piecesMetadata) {
+            const donorPDFBytes = await fetch(metadata.id).then(res => res.arrayBuffer())
+            const donorPdfDoc = await PDFDocument.load(donorPDFBytes)
+
+            const indices_to_copy = metadata.excerpt_value;
+
+            const donorPages = await combinedPdfDoc.copyPages(donorPdfDoc, indices_to_copy)
+
+            donorPages.forEach(page => {
+                combinedPdfDoc.addPage(page)
+            })
         }
-        piecesMetadata.push(pieceInfo);
-    })
 
-    const combinedPdfDoc = await PDFDocument.create();
+        const PDF_pages = await combinedPdfDoc.getPages()
+        const pdfBytes = await combinedPdfDoc.save();
 
-    for (const metadata of piecesMetadata) {
-        const donorPDFBytes = await fetch(metadata.id).then(res => res.arrayBuffer())
-        const donorPdfDoc = await PDFDocument.load(donorPDFBytes)
-
-        const indices_to_copy = metadata.excerpt_value;
-
-        const donorPages = await combinedPdfDoc.copyPages(donorPdfDoc, indices_to_copy)
-
-        donorPages.forEach(page => {
-            combinedPdfDoc.addPage(page)
+        const pdfIframe = document.getElementById('combinedPdfsFrame');
+        pdfIframe.setAttribute('style', "display: block;")
+        pdfIframe.setAttribute('src', URL.createObjectURL(new Blob([pdfBytes], { type: 'application/pdf' })))
+        
+        downloadPDFButton.addEventListener('click', () => {
+            download(pdfBytes, "combinedPDF", "application/pdf");
         })
     }
-
-    const PDF_pages = await combinedPdfDoc.getPages()
-    const pdfBytes = await combinedPdfDoc.save();
-
-    const pdfIframe = document.getElementById('combinedPdfsFrame');
-    pdfIframe.setAttribute('style', "display: block;")
-    pdfIframe.setAttribute('src', URL.createObjectURL(new Blob([pdfBytes], { type: 'application/pdf' })))
-    
-    downloadPDFButton.addEventListener('click', () => {
-        download(pdfBytes, "combinedPDF", "application/pdf");
-    })
+    else {
+        alert("Add a piece to create your list!");
+    }
 }
 
 function closeAuditionList() {
