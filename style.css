@@ -76,7 +76,6 @@ h2 {
     background-image: url('bass.jpg');
     transform: scaleX(-1);
     background-size: cover;
-    border-bottom: 1px solid black;
 }
 
 .getStarted {
@@ -183,7 +182,7 @@ aside {
     justify-content: center;
     align-items: center;
     padding: 20px;
-    height: auto;
+    height: 100px;
     margin-bottom: 5px;
     cursor: move;
 }
@@ -193,8 +192,6 @@ aside {
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    padding: 20px;
-    height: auto;
     margin-bottom: 10px;
     cursor: move;
 }
@@ -276,11 +273,6 @@ button {
 
 select {
     width: 35%;
-}
-
-.pieceContent {
-    display: flex;
-    flex-direction: column;
 }
 
 .buttonWrapper {
@@ -365,6 +357,10 @@ select {
         width: 325px;
         cursor: pointer;
         text-align: left;
+    }
+
+    .pieceContent {
+        flex-direction: column;
     }
 
     .addPiece {
