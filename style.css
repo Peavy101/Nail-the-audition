@@ -67,6 +67,11 @@ h2 {
     transform: scaleX(-1);
 }
 
+h4 {
+    font-size: large;
+    font-weight: bold;
+}
+
 .homeHeader {
     display: flex;
     align-items: center;
