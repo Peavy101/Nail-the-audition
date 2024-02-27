@@ -210,6 +210,20 @@ fetch("https://api.npoint.io/d1c2bc93f272778194a3")
                 pieceComposerText = pieceComposer.textContent;
                 pieceTitleText = pieceTitle.textContent;
     
+                const pieceContent = document.createElement("div");
+                pieceContent.setAttribute('class', "pieceContent");
+                const buttonWrapper = document.createElement("div");
+                buttonWrapper.setAttribute('class', "buttonWrapper");
+
+                const upButton = document.createElement("button");
+                upButton.setAttribute('class', "upButton");
+                upButton.setAttribute('onclick', "moveElement(this, 'up')");
+                upButton.innerText = "↑";
+                const downButton = document.createElement("button");
+                downButton.setAttribute('class', "downButton");
+                downButton.setAttribute('onclick', "moveElement(this, 'down')");
+                downButton.innerText = "↓";
+
                 const listPiece_id = pieceData.link;
                 const pieceWrapper = document.createElement("div");
                 pieceWrapper.setAttribute('id', listPiece_id);
@@ -234,16 +248,21 @@ fetch("https://api.npoint.io/d1c2bc93f272778194a3")
                         excerptSelect.appendChild(option)
                     }
                 )
-                pieceWrapper.appendChild(pieceText);
-                pieceWrapper.appendChild(excerptSelect);
-                pieceWrapper.appendChild(removePieceButton);
+
+                buttonWrapper.appendChild(upButton);
+                buttonWrapper.appendChild(downButton);
+                pieceContent.appendChild(pieceText);
+                pieceContent.appendChild(excerptSelect);
+                pieceContent.appendChild(removePieceButton);
+                pieceWrapper.appendChild(pieceContent);
+                pieceWrapper.appendChild(buttonWrapper);
                 listContainer.appendChild(pieceWrapper);
 
                 pieceElement.remove()
                 pieceContainer.prepend(pieceElement);
                 
                 removePieceButton.addEventListener('click', () => {
-                    const parentElement = removePieceButton.parentNode;
+                    const parentElement = removePieceButton.parentNode.parentNode;
                     pieceElement.classList.remove('highlight')
                     parentElement.remove();
                 })
@@ -353,4 +372,17 @@ async function combinePDFS() {
 
 function closeAuditionList() {
     auditionList.classList.add('hide');
+}
+
+function moveElement(button, direction) {
+    const item = button.parentElement.parentElement;
+    const container = item.parentElement;
+
+    console.log(`Moving ${direction}: ${item.textContent}`);
+    
+    if (direction === 'up' && item.previousElementSibling) {
+        container.insertBefore(item, item.previousElementSibling);
+    } else if (direction === 'down' && item.nextElementSibling) {
+        container.insertBefore(item.nextElementSibling, item);
+    }
 }

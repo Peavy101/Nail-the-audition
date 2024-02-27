@@ -153,12 +153,23 @@ aside {
 }
 
 .list-piece {
+    border: 1px solid black;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    height: auto;
+    margin-bottom: 5px;
+    cursor: move;
+}
+
+.pieceContent {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
     padding: 20px;
-    border: 1px solid black;
     height: auto;
     margin-bottom: 10px;
     cursor: move;
@@ -243,6 +254,29 @@ select {
     width: 35%;
 }
 
+.pieceContent {
+    display: flex;
+    flex-direction: column;
+}
+
+.buttonWrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+}
+
+.upButton {
+    display: none;
+    width: 30px;
+    height: 30px;
+}
+
+.downButton {
+    display: none;
+    width: 30px;
+    height: 30px;
+} 
 
 @media screen and (max-width:850px){
 
@@ -296,11 +330,10 @@ select {
 
     .list-piece {
         display: flex;
-        flex-direction: column;
+        flex-direction: row;
         justify-content: space-between;
         align-items: center;
         padding: 20px;
-        border: 1px solid black;
         height: auto;
         margin-bottom: 5px;
         cursor: move;
@@ -322,4 +355,16 @@ select {
     .highlight {
         border: 5px solid blueviolet;
     }
+
+    .upButton {
+        display: block;
+        width: 30px;
+        height: 30px;
+    }
+    
+    .downButton {
+        display: block;
+        width: 30px;
+        height: 30px;
+    } 
 }
