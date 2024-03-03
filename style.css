@@ -7,7 +7,8 @@ body, section {
     margin: 0;
     font-family: Inconsolata;
     overflow-wrap: break-word;
-    margin: 0 150px;
+    /* margin: 0 150px; */
+    margin: 0 10%;
 }
 
 .page {
@@ -103,7 +104,7 @@ h4 {
     border: 1px solid black;
     padding: 15px;
     margin-top: 35px;
-    width: 80%;
+    width: 356.8px;
     cursor: pointer;
 }
 
@@ -329,6 +330,10 @@ select {
 }
 
 @media screen and (max-width:850px){
+
+    body {
+        margin: 0;
+    }
 
     #library:not(.hide) {
         flex-direction: column-reverse;

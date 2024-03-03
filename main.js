@@ -204,9 +204,11 @@ fetch("https://api.npoint.io/d1c2bc93f272778194a3")
                 isMouseOverButton=false;
             })
 
+
+            //commented sections are for implementing a highlight feature which I may implement later but for now prefer without//
             pieceButton.addEventListener('click', () => {
                 auditionList.classList.remove('hide');
-                pieceElement.classList.add('highlight');
+                // pieceElement.classList.add('highlight');
                 pieceComposerText = pieceComposer.textContent;
                 pieceTitleText = pieceTitle.textContent;
     
@@ -258,8 +260,8 @@ fetch("https://api.npoint.io/d1c2bc93f272778194a3")
                 pieceWrapper.appendChild(buttonWrapper);
                 listContainer.appendChild(pieceWrapper);
 
-                pieceElement.remove()
-                pieceContainer.prepend(pieceElement);
+                // pieceElement.remove()
+                // pieceContainer.prepend(pieceElement);
                 
                 removePieceButton.addEventListener('click', () => {
                     const parentElement = removePieceButton.parentNode.parentNode;
