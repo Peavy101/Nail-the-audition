@@ -335,6 +335,10 @@ select {
         margin: 0;
     }
 
+    h1 {
+        width: auto;
+    }
+
     #library:not(.hide) {
         flex-direction: column-reverse;
         justify-content: center;
