@@ -7,9 +7,8 @@ body, section {
     margin: 0;
     font-family: Inconsolata;
     overflow-wrap: break-word;
-    /* margin: 0 150px; */
     margin: 0 10%;
-    overflow-x: hidden;
+    /* overflow-x: hidden; */
 }
 
 .page {
@@ -338,13 +337,36 @@ select {
 
 @media screen and (max-width:850px){
 
+    #nav-wrapper {
+        flex-direction: column;
+        height: auto;
+        margin: 0;
+        padding: 0;
+    }
+
+    nav {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+    }
+
     body {
         margin: 0;
         padding: 0;
         width: 100%;
     }
 
+    section {
+        margin: 0;
+        padding: 0;
+        width: 100%;
+    }
+
     h1 {
+        margin: 0;
+        padding: 0;
         width: auto;
     }
 
