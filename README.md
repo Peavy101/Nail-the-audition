@@ -3,7 +3,7 @@
 
  Check it out here ---> https://peavy101.github.io/Nail-the-audition/
 
-![read me photo 1]([readmePhotos/RP1.png](https://github.com/Peavy101/Nail-the-audition/blob/028466941d1510b3e0b5dbf33ce4e83e7bc6fdc3/readmePhotos/RP1.png))
+![read me photo 1](https://github.com/Peavy101/Nail-the-audition/blob/main/readmePhotos/RP1.png)
 ![read me photo 2](https://github.com/Peavy101/Nail-the-audition/blob/904dc05accf58a93a5605546bdf12a21c43322e5/readmePhotos/RP2.png)
 
  ## Motivation 🎶
