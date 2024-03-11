@@ -33,9 +33,29 @@ let piece_excerpts =
         {excerpt_2: [3, 4]},
         {excerpt_3: [3, 4, 5]}
     ],
+    './scores/BachConcertoForViolin2Emajor.pdf': [
+        {Full_Piece: [0,1,2,3,4]},
+        {Adagio: [3]}
+    ],
+    './scores/BachMagnificat.pdf': [
+        {Full_Piece: [0,1,2,3,4,5]},
+        {No_2_Et_Exultavita: [1]}
+    ],
     './scores/BachOrchestralSuite2.pdf': [
         {Full_Piece: [0,1,2,3]},
         {Badinerie: [3]}
+    ],
+    './scores/BartokConcertoForOrchestra.pdf': [
+        {Full_Piece: [1,2,3,4,5,6,7,8,9,10,11,12,13,14]},
+        {First_Page: [1]}
+    ],
+    './scores/BartokConcertoForOrchestra.pdf': [
+        {Full_Piece: [1,2,3,4,5,6,7,8,9,10,11,12]},
+        {Rehearsal_35: [1,2]}
+    ],
+    './scores/BeethovenSymphony3.pdf': [
+        {Full_Piece: [0,1,2,3,3,4,5,6,7,8,9,10,11,12,13,14,15]},
+        {Scherzo: [9]}
     ],
     './scores/BeethovenSymphony5.pdf': [
         {Full_Piece: [0,1,2,3,4,5,6,7,8,9,10,11]},
@@ -98,20 +118,6 @@ let piece_excerpts =
     ]
 
 }
-
-// piece_excerpts["./scores/BachOrchestralSuite2.pdf"] = [3];
-// piece_excerpts["./scores/BeethovenSymphony5.pdf"] = [5, 6, 7];
-// piece_excerpts["./scores/BerliozSymphonieFantastique.pdf"] = [12];
-// piece_excerpts["./scores/BrahmsSymphony1.pdf"] = [1];
-// piece_excerpts["./scores/BrahmsSymphony2.pdf"] = [0, 1];
-// piece_excerpts["./scores/MahlerSymphony1.pdf"] = [5];
-// piece_excerpts["./scores/MahlerSymphony2.pdf"] = [0];
-// piece_excerpts["./scores/MozartSymphony39.pdf"] = [0];
-// piece_excerpts["./scores/MozartSymphony40.pdf"] = [1, 2];
-// piece_excerpts["./scores/MussorgskyRavelPicturesAtAnExhibition.pdf"] = [4];
-// piece_excerpts["./scores/StraussDonJuan.pdf"] = [0];
-// piece_excerpts["./scores/StraussHeldenleben.pdf"] = [1];
-
 
 // Retrieves all UL elements in the Nav Bar
 const nav_links = document.querySelectorAll('ul')
