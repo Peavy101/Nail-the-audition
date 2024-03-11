@@ -55,12 +55,28 @@ let piece_excerpts =
     ],
     './scores/BeethovenSymphony3.pdf': [
         {Full_Piece: [0,1,2,3,3,4,5,6,7,8,9,10,11,12,13,14,15]},
-        {Scherzo: [9]}
+        {Scherzo: [9]},
+        {Fourth_Movement_m294: [14]}
     ],
     './scores/BeethovenSymphony5.pdf': [
         {Full_Piece: [0,1,2,3,4,5,6,7,8,9,10,11]},
         {Second_Movement: [4]},
         {Scherzo_and_Trio: [5,6,7]}
+    ],
+    './scores/BeethovenSymphony7.pdf': [
+        {Full_Piece: [0,1,2,3,4,5,6,7,8,9,10,11,12,13]},
+        {First_Page: [0]},
+        {Second_Page: [1]},
+        {Letter_I: [2]}
+    ],
+    './scores/BeethovenSymphony9.pdf': [
+        {Full_Piece: [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24]},
+        {Recits: [16]},
+        {Movement_Four_Letter_K: [19,20]},
+        {Movement_Four_Letter_M: [20]},
+        {Movement_Four_663_671: [21]},
+        {Movement_Four_765_810: [23]},
+        {Movement_Four_Last_Page: [24]}
     ],
     './scores/BerliozSymphonieFantastique.pdf':[
         {Full_Piece: [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14]},
