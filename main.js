@@ -106,6 +106,18 @@ let piece_excerpts =
         {Full_Piece: [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19]},
         {First_Page: [0]}
     ],
+    './scores/MendelssohnSymphony4.pdf': [
+        {Full_Piece: [0,1,2,3,4,5,6,7,8,9,10]},
+        {First_Page: [0]},
+        {Measure265to287:[2]},
+        {Movement_Four_32to52: [8]},
+        {Movement_Four_166to179: [9]}
+    ],
+    './scores/MozartMarriageOfFigaroOuverture.pdf': [
+        {Full_Piece: [0,1]},
+        {First_Page: [0]},
+        {Second_Page: [1]}
+    ],
     './scores/MozartSymphony39.pdf': [
         {Full_Piece: [0,1,2,3,4,5,6]},
         {First_Page: [0]},
