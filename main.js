@@ -9,6 +9,8 @@ const removePieceButtons = document.querySelectorAll('.removePiece')
 const auditionList = document.getElementById('auditionList');
 const downloadPDFButton = document.getElementById('downloadPDF');
 
+let listCreated = false;
+
 let pieces = []
 
 const sample_array = [0, {a: 1, b: 2}, 2, 3]
@@ -356,6 +358,8 @@ function drag() {
 
 async function combinePDFS() {
 
+    listCreated = true;
+
     if (listContainer.innerHTML.trim() !== '') {
         const pieceSelects = listContainer.querySelectorAll('select')
         const piecesMetadata = [];
@@ -398,7 +402,7 @@ async function combinePDFS() {
         pdfIframe.setAttribute('src', URL.createObjectURL(new Blob([pdfBytes], { type: 'application/pdf' })))
         
         downloadPDFButton.addEventListener('click', () => {
-            download(pdfBytes, "combinedPDF", "application/pdf");
+            download(pdfBytes, "combinedPDF", "application/pdf");  
         })
     }
     else {
@@ -422,3 +426,12 @@ function moveElement(button, direction) {
         container.insertBefore(item.nextElementSibling, item);
     }
 }
+
+downloadPDFButton.addEventListener('click', () => {
+    if (listContainer.innerHTML.trim() !== '') {
+        if(!listCreated) {
+            alert("Press create list first!");
+        }
+    }
+    else {alert("Add a piece to download!");}
+})
