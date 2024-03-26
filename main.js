@@ -120,6 +120,12 @@ let piece_excerpts =
         {First_Page: [0]},
         {Second_Page: [1]}
     ],
+    './scores/MozartSymphony35.pdf': [
+        {Full_Piece: [0,1,2,3,4,5]},
+        {First_Page: [0]},
+        {Fourth_Movement_Measure1to54: [3,4]},
+        {Fourth_Movement_Last_Page: [5]}
+    ],
     './scores/MozartSymphony39.pdf': [
         {Full_Piece: [0,1,2,3,4,5,6]},
         {First_Page: [0]},
